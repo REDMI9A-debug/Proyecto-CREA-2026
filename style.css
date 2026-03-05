@@ -334,37 +334,37 @@ html, body {
 
 /* --- 9. AJUSTES MÓVILES (MEDIA QUERIES) --- */
 /* Todo lo relacionado a celulares va en este único bloque final */
-@media (max-width: 968px) {
-    .geo-content { grid-template-columns: 1fr; }
-    .frase-geo { font-size: 1.8rem; }
-}
 
 @media (max-width: 768px) {
-    /* Ajustes generales */
-    .hero-content h1 { font-size: 2.8rem; }
-    .nav-menu { display: none; }
-    body { overflow-x: hidden; }
-    
-    /* Forzar Edge to Edge sin recortes */
-    section, .container {
-        width: 100% !important; max-width: 100% !important;
-        padding-left: 15px !important; padding-right: 15px !important;
-        margin-left: 0 !important; margin-right: 0 !important;
-        box-sizing: border-box;
+    /* 1. Ajustamos la altura del header para que quepa todo */
+    .navbar {
+        height: auto !important;
+        padding: 15px 5% !important;
+        flex-direction: column; /* Ponemos el logo arriba y el botón abajo */
+        gap: 15px;
+        position: relative; /* Para que no tape el contenido al crecer */
     }
-    
-    /* Carrusel Edge to Edge */
-    .carrusel-fiestas {
-        width: 100vw; margin-left: -15px; padding-left: 15px !important;
+
+    /* 2. El logo y nombre más pequeños para que no ocupen tanto espacio */
+    .escudo {
+        height: 60px !important; /* Logo más discreto */
     }
-    .fiesta-card { min-width: 280px; height: 400px; }
-    
-    /* Video Grid */
-    .video-grid { grid-template-columns: 1fr; gap: 30px; }
-    
-    /* Botones flexibles */
-    .btn-conocer-mas, .btn-radio {
-        width: 100%; max-width: 320px; font-size: 0.95rem;
-        padding: 12px 15px; white-space: normal;
+
+    .brand-name {
+        font-size: 0.8rem !important;
+    }
+
+    .tagline {
+        font-size: 0.6rem !important;
+    }
+
+    /* 3. El botón "ESCUCHAR AHORA" más estilizado */
+    .btn-radio {
+        width: 100% !important; /* Que ocupe el ancho del cel */
+        max-width: none !important;
+        padding: 10px !important;
+        font-size: 0.85rem !important;
+        min-width: 0 !important;
+        border-radius: 5px !important;
     }
 }
