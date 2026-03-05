@@ -336,35 +336,46 @@ html, body {
 /* Todo lo relacionado a celulares va en este único bloque final */
 
 @media (max-width: 768px) {
-    /* 1. Ajustamos la altura del header para que quepa todo */
+    /* 1. Header: Lo hacemos más alto para que quepan los dos niveles */
     .navbar {
         height: auto !important;
-        padding: 15px 5% !important;
-        flex-direction: column; /* Ponemos el logo arriba y el botón abajo */
-        gap: 15px;
-        position: relative; /* Para que no tape el contenido al crecer */
+        flex-direction: column !important;
+        padding: 10px 5% !important;
+        gap: 10px !important;
     }
 
-    /* 2. El logo y nombre más pequeños para que no ocupen tanto espacio */
-    .escudo {
-        height: 60px !important; /* Logo más discreto */
-    }
+    .escudo { height: 50px !important; } /* Escudo más pequeño */
 
-    .brand-name {
-        font-size: 0.8rem !important;
-    }
+    .brand-name { font-size: 0.8rem !important; }
+    .tagline { font-size: 0.6rem !important; }
 
-    .tagline {
-        font-size: 0.6rem !important;
-    }
-
-    /* 3. El botón "ESCUCHAR AHORA" más estilizado */
     .btn-radio {
-        width: 100% !important; /* Que ocupe el ancho del cel */
-        max-width: none !important;
-        padding: 10px !important;
-        font-size: 0.85rem !important;
+        width: 100% !important;
+        padding: 8px !important;
+        font-size: 0.8rem !important;
         min-width: 0 !important;
-        border-radius: 5px !important;
+    }
+
+    /* 2. HERO: Aquí está el problema del texto gigante */
+    .hero-content h1 {
+        font-size: 2.2rem !important; /* Bajamos el tamaño para que no desborde */
+        line-height: 1.2 !important;
+        margin-top: 120px; /* Le damos espacio para que no lo tape el header */
+    }
+
+    .hero-content p {
+        font-size: 1rem !important;
+    }
+
+    /* 3. Ajustes de secciones para que no se corten */
+    section, .container {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+
+    /* 4. Carrusel: Mantenemos el flujo sin que se aplaste */
+    .fiesta-card {
+        min-width: 260px !important;
+        height: 350px !important;
     }
 }
