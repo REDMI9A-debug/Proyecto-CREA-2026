@@ -451,5 +451,5 @@ html, body {
     font-family: var(--fuente-titulo);
     font-size: clamp(2rem, 5vw, 4rem); /* Fluido para compu y cel */
     color: white;
-    text-shadow: 0 0 20px rgba(50, 205, 50, 0.3);
+    text-shadow: 0 0 20px rgb(11, 221, 11)
 }
