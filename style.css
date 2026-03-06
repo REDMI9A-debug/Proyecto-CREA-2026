@@ -453,7 +453,7 @@ html, body {
         flex-direction: column !important;
         justify-content: flex-start !important;
         height: auto !important;
-        min-height: 100vh !important;
+        min-height: 200vh !important;
     }
 
     .hero-content h1 {
