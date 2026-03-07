@@ -448,12 +448,12 @@ html, body {
     /* EL ARREGLO PARA EL BIENVENIDOS: Lo bajamos con fuerza */
     .hero-principal {
         /* Aumentamos a 260px para que haya aire de sobra entre el botón y el título */
-        padding-top: 260px !important; 
+        padding-top: 210px !important; 
         display: flex !important;
         flex-direction: column !important;
         justify-content: flex-start !important;
         height: auto !important;
-        min-height: 200vh !important;
+        min-height: 130vh !important;
     }
 
     .hero-content h1 {
