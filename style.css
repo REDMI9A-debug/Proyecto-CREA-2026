@@ -85,7 +85,7 @@ html, body {
 
 .btn-radio:hover {
     box-shadow: 0 0 20px rgba(50, 205, 50, 0.4);
-    transform: scale(1);
+    transform: scale(1.06);
 }
 
 /* --- 3. HERO SECTION (IMPACTO) --- */
