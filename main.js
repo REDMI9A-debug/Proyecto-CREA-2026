@@ -1,129 +1,93 @@
-// Inicialización de la librería de animaciones AOS
-AOS.init({
-    duration: 1000, // Duración de la animación en milisegundos
-    once: true,     // Define si la animación debe ocurrir solo una vez al bajar
-    mirror: false,  // Define si los elementos deben animarse al hacer scroll hacia arriba
+// --- 1. SEGURO DE CARGA ---
+// Esperamos a que todo el HTML esté listo antes de buscar los botones
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // --- 2. MODAL DE LA CASA DE OLMEDO (BOTÓN VERDE) ---
+    // IDs exactos de tu index.html: abrirModal, cerrarModal, modalOlmedo
+    const btnVerde = document.getElementById('abrirModal');
+    const btnX = document.getElementById('cerrarModal');
+    const ventanaModal = document.getElementById('modalOlmedo');
+
+    if (btnVerde && ventanaModal) {
+        btnVerde.onclick = function(e) {
+            e.preventDefault(); // Evita que la página salte
+            ventanaModal.style.display = 'flex'; 
+            console.log("Modal Olmedo abierto");
+        };
+    }
+
+    if (btnX && ventanaModal) {
+        btnX.onclick = function() {
+            ventanaModal.style.display = 'none';
+        };
+    }
+
+    // --- 3. CIERRE GLOBAL (CLIC AFUERA) ---
+    window.onclick = function(event) {
+        if (event.target == ventanaModal) {
+            ventanaModal.style.display = 'none';
+        }
+        const modalMapa = document.getElementById('modal-mapa');
+        if (event.target == modalMapa) {
+            modalMapa.style.display = 'none';
+        }
+    };
 });
 
-// veo si puedo agregar más funciones interactivas más adelante
-console.log("Main.js cargado correctamente vlo");
-const modal = document.getElementById("modalOlmedo");
-const btnAbrir = document.getElementById("abrirModal");
-const btnCerrar = document.getElementById("cerrarModal");
-
-// Abrir Modal
-btnAbrir.onclick = function() {
-    modal.style.display = "flex";
-    document.body.style.overflow = "hidden"; // Bloquea el scroll del fondo
-}
-
-// Cerrar Modal
-btnCerrar.onclick = function() {
-    modal.style.display = "none";
-    document.body.style.overflow = "auto"; // Libera el scroll osea se encarga de el
-}
-
-// Cerrar si hace clic fuera del contenido solo eso
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-        document.body.style.overflow = "auto";
-    }
-}
-// --- BASE DE DATOS DE TURISMO ---
-const infoTurismo = {
-    'salto': {
-        titulo: 'Playas del Salto',
-        img: 'ruta-a-tu-imagen/playas-salto.jpg',
-        historia: 'Es el principal atractivo turístico de Babahoyo durante la época playera. Sus aguas dulces y tranquilas son el escenario perfecto para las famosas regatas y deportes acuáticos.',
-        comoLlegar: 'Se encuentra cruzando el río Babahoyo, accesible mediante botes desde el malecón o por la vía terrestre.',
-        mapa: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.1!2d-79.5!3d-1.8!' // Ejemplo de link
-    },
-    'malecon': {
-        titulo: 'Malecón 9 de Octubre',
-        img: 'ruta-a-tu-imagen/malecon.jpg',
-        historia: 'Considerado uno de los malecones más bellos de la región, ofrece una vista espectacular del río y las famosas casas flotantes.',
-        comoLlegar: 'Ubicado en pleno centro de la ciudad, sobre la Av. 9 de Octubre.',
-        mapa: 'LINK_DE_GOOGLE_MAPS'
-    },
-    'olmedo': {
-        titulo: 'Casa de Olmedo',
-        img: 'ruta-a-tu-imagen/casa-olmedo.jpg',
-        historia: 'Lugar histórico donde José Joaquín de Olmedo escribió parte de su obra y donde se firmó el Tratado de la Virginia.',
-        comoLlegar: 'Ubicada en la orilla opuesta de la ciudad, se puede llegar cruzando el puente peatonal.',
-        mapa: 'LINK_DE_GOOGLE_MAPS'
-    },
-    'cachari': {
-        titulo: 'Cerro Cacharí',
-        img: 'ruta-a-tu-imagen/cerro-cachari.jpg',
-        historia: 'Un macizo rocoso rodeado de leyendas. Es el lugar ideal para el senderismo y para observar la biodiversidad de la zona.',
-        comoLlegar: 'A 15 minutos de la ciudad en vehículo, vía a la parroquia Barreiro.',
-        mapa: 'LINK_DE_GOOGLE_MAPS'
+// --- 4. FUNCIÓN PARA LAS 6 CARDS DE TURISMO ---
+// Esta función queda fuera del DOMContentLoaded para que el HTML la encuentre
+function abrirMapa(lugar) {
+    const modalGeneral = document.getElementById('modal-mapa');
+    
+    const datos = infoLugares[lugar];
+    if (datos && modalGeneral) {
+        document.getElementById('modal-img').src = datos.img; 
+        document.getElementById('modal-titulo').innerText = datos.titulo;
+        document.getElementById('modal-descripcion').innerText = datos.desc;
+        modalGeneral.style.display = 'flex'; 
     }
 };
 
-// --- FUNCIONES DEL MODAL ---
-function abrirModalTurismo(id) {
-    const lugar = infoTurismo[id];
-    if (!lugar) return;
-
-    // Llenar la información en el modal
-    document.getElementById('modal-titulo').innerText = lugar.titulo;
-    document.getElementById('modal-img').src = lugar.img;
-    document.getElementById('modal-descripcion').innerText = lugar.historia;
-    document.getElementById('modal-como-llegar').innerText = lugar.comoLlegar;
-    
-    // Mostrar el modal (usando el display flex que ya tienes en CSS)
-    document.getElementById('modal-turismo').style.display = 'flex';
-    document.body.style.overflow = 'hidden'; // Bloquea el scroll del fondo
-}
-
-function cerrarModal() {
-    document.getElementById('modal-turismo').style.display = 'none';
-    document.body.style.overflow = 'auto'; // Devuelve el scroll
-}
-
-// Cerrar si hacen clic afuera del cuadro blanco
-window.onclick = function(event) {
-    const modal = document.getElementById('modal-turismo');
-    if (event.target == modal) {
-        cerrarModal();
-    }
-}
-function abrirMapa(lugar) {
-    const modal = document.getElementById('modal-mapa');
-    const titulo = document.getElementById('modal-titulo');
-    const desc = document.getElementById('modal-descripcion');
-    const enlace = document.getElementById('modal-enlace-maps');
-    const img = document.getElementById('modal-img');
-
-    // Base de datos rápida para los 6 lugares
-    const datos = {
+const infoLugares = {
+        'salto': {
+            img: 'playairresistible.png', 
+            titulo: 'Playas del Salto',
+            desc: 'Nuestra joya de agua dulce. Disfruta de deportes acuáticos y regatas.',
+            maps: 'https://maps.app.goo.gl/vm8qYZRScXA6HJkZ7'
+        },
+        'malecon': {
+            img: 'malecon9octubre.png',
+            titulo: 'Malecón 9 de Octubre',
+            desc: 'Un paseo hermoso junto al río para disfrutar de la gastronomía.',
+            maps: 'https://www.google.com/maps/search/?api=1&query=Malecon+9+de+Octubre+Babahoyo'
+        },
+        'olmedo': {
+            img: 'casadeolmedo2.png',
+            titulo: 'Casa de Olmedo',
+            desc: 'Museo histórico donde se firmó el tratado de la Virginia.',
+            maps: 'https://www.google.com/maps/search/?api=1&query=Casa+de+Olmedo+Babahoyo'
+        },
         'cachari': {
-            t: 'Cerro Cacharí',
-            d: 'Ubicado a 8km de Babahoyo. Puedes llegar en taxi o bus interparroquial hacia la parroquia Barreiro.',
-            link: 'https://maps.app.goo.gl/P6GzS9vPz9A2',
-            img: 'img/cachari.jpg'
+            img: 'cerrocachari.png',
+            titulo: 'Cerro Cacharí',
+            desc: 'Aventura y leyendas con vistas panorámicas de la llanura.',
+            maps: 'https://www.google.com/maps/search/?api=1&query=Cerro+Cachari+Babahoyo'
         },
         'catedral': {
-            t: 'Iglesia Catedral',
-            d: 'En pleno centro de la ciudad, frente al Parque Central 24 de Mayo.',
-            link: 'https://maps.app.goo.gl/your-link-here',
-            img: 'img/catedral.jpg'
+            img: 'actualidadbabah.png', 
+            titulo: 'Iglesia Catedral',
+            desc: 'Ícono arquitectónico famoso por su mural de mosaicos.',
+            maps: 'https://www.google.com/maps/search/?api=1&query=Catedral+de+Babahoyo'
+        },
+        'parque': {
+            img: 'parque24mayo.png',
+            titulo: 'Parque 24 de Mayo',
+            desc: 'Punto de encuentro tradicional bajo árboles centenarios.',
+            maps: 'https://www.google.com/maps/search/?api=1&query=Parque+24+de+Mayo+Babahoyo'
         }
-        // Agrega aquí los otros 4 siguiendo el mismo formato
     };
 
-    const info = datos[lugar];
-    if(info) {
-        titulo.innerText = info.t;
-        desc.innerText = info.d;
-        enlace.href = info.link;
-        img.src = info.img;
-        modal.style.display = 'flex';
-    }
-}
-
 function cerrarMapa() {
-    document.getElementById('modal-mapa').style.display = 'none';
+    const modalGeneral = document.getElementById('modal-mapa');
+    if (modalGeneral) modalGeneral.style.display = 'none';
 }

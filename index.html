@@ -9,7 +9,7 @@
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -49,38 +49,39 @@
         </div>
     </section>
 <section class="seccion-cards">
+
     <div class="container-cards">
-        <div class="card-premium">
+        <div class="card-premium" data-aos="fade-up">
             <div class="card-icon">🏛️</div>
             <h3>Historia Viva</h3>
             <p>Fundada en 1848, Babahoyo fue testigo de hitos como la firma del <strong>Tratado de la Virginia</strong> en la Hacienda de Olmedo.</p>
         </div>
 
-        <div class="card-premium">
+        <div class="card-premium" data-aos="fade-up" data-aos-delay="100">
             <div class="card-icon">📍</div>
             <h3>Geografía Única</h3>
             <p>Capital de Los Ríos, se asienta en la unión de los ríos San Pablo y Caracol. Es la <strong>Capital Fluvial</strong> del país.</p>
         </div>
 
-        <div class="card-premium">
+        <div class="card-premium" data-aos="fade-up" data-aos-delay="100">
             <div class="card-icon">💡</div>
             <h3>Datos Curiosos</h3>
             <p>Posee las <strong>Casas Flotantes</strong>, únicas en su tipo y Patrimonio de la Nación, símbolo de nuestro ingenio fluvial.</p>
         </div>
 
-        <div class="card-premium">
+        <div class="card-premium"  data-aos="fade-up" data-aos-delay="100">
             <div class="card-icon">🌾</div>
             <h3>Riqueza Agrícola</h3>
             <p>Babahoyo es el <strong>corazón arrocero</strong> del Ecuador, rodeada de fértiles tierras que alimentan a toda la nación.</p>
         </div>
 
-        <div class="card-premium">
+        <div class="card-premium" data-aos="fade-up" data-aos-delay="100">
             <div class="card-icon">🛶</div>
             <h3>Turismo Fluvial</h3>
         <p>Disfruta de paseos en lancha por el río Babahoyo, donde la <strong>naturaleza y el atardecer</strong> crean paisajes inolvidables.</p>
     </div>
 
-    <div class="card-premium">
+    <div class="card-premium" data-aos="fade-up" data-aos-delay="100">
         <div class="card-icon">☀️</div>
         <h3>Clima Tropical</h3>
         <p>Con una temperatura promedio de <strong>25°C</strong>, nuestro clima cálido es ideal para el cultivo y la alegría de nuestra gente.</p>
@@ -363,7 +364,7 @@
             <div class="turismo-info">
                 <h3>Playas del Salto</h3>
                 <p>Nuestra joya de agua dulce. Disfruta de deportes acuáticos, regatas y miles de visitantes en la época de Carnaval.</p>
-                <button class="btn-leer-mas" onclick="abrirModalTurismo('salto')">Leer más</button>
+                <button class="btn-leer-mas" onclick="abrirMapa('salto')">Leer más</button>
             </div>
         </div>
 
@@ -374,7 +375,7 @@
             <div class="turismo-info">
                 <h3>Malecón 9 de Octubre</h3>
                 <p>Un paseo hermoso junto al río, ideal para disfrutar de la gastronomía típica y la góndola turística.</p>
-                <button class="btn-leer-mas" onclick="abrirModalTurismo('malecon')">Leer más</button>
+                <button class="btn-leer-mas" onclick="abrirMapa('malecon')">Leer más</button>
             </div>
         </div>
 
@@ -385,7 +386,7 @@
             <div class="turismo-info">
                 <h3>Casa de Olmedo</h3>
                 <p>Museo histórico donde se firmó el tratado de la Virginia. Un viaje fascinante al pasado de nuestra nación.</p>
-                <button class="btn-leer-mas" onclick="abrirModalTurismo('olmedo')">Leer más</button>
+                <button class="btn-leer-mas" onclick="abrirMapa('olmedo')">Leer más</button>
             </div>
         </div>
 
@@ -396,7 +397,7 @@
             <div class="turismo-info">
                 <h3>Cerro Cacharí</h3>
                 <p>Aventura, misterio y leyendas (como la de la Dama Encantada), con vistas panorámicas de toda la llanura.</p>
-                <button class="btn-leer-mas" onclick="abrirModalTurismo('cachari')">Leer más</button>
+                <button class="btn-leer-mas" onclick="abrirMapa('cachari')">Leer más</button>
             </div>
         </div>
 
@@ -407,7 +408,7 @@
             <div class="turismo-info">
                 <h3>Iglesia Catedral</h3>
                 <p>Un ícono arquitectónico en el corazón de la ciudad, famosa por su impresionante mural de mosaicos.</p>
-                <button class="btn-leer-mas" onclick="abrirModalTurismo('catedral')">Leer más</button>
+                <button class="btn-leer-mas" onclick="abrirMapa('catedral')">Leer más</button>
             </div>
         </div>
 
@@ -418,7 +419,7 @@
             <div class="turismo-info">
                 <h3>Parque 24 de Mayo</h3>
                 <p>El punto de encuentro tradicional babahoyense para relajarse bajo la sombra de los árboles centenarios.</p>
-                <button class="btn-leer-mas" onclick="abrirModalTurismo('parque')">Leer más</button>
+                <button class="btn-leer-mas" onclick="abrirMapa('parque')">Leer más</button>
             </div>
         </div>
     </div>
@@ -428,28 +429,35 @@
     </div>
 </section>
 
-
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script src="main.js"></script>
-    <div id="modal-mapa" class="modal-overlay">
-    <div class="modal-container">
-        <button class="btn-cerrar" onclick="cerrarMapa()">×</button>
-        <div class="modal-header">
-            <img id="modal-img" src="" alt="Lugar" class="img-header-modal">
-            <div class="modal-titulo-overlay">
-                <h2 id="modal-titulo" style="font-family: var(--fuente-titulo); color: white;"></h2>
+<div id="modal-mapa" class="modal-overlay">
+        <div class="modal-container">
+            <button class="btn-cerrar" onclick="cerrarMapa()">×</button>
+            <div class="modal-header">
+                <img id="modal-img" src="" alt="Lugar" class="img-header-modal">
+                <div class="modal-titulo-overlay">
+                    <h2 id="modal-titulo"></h2>
+                </div>
             </div>
-        </div>
-        <div class="modal-body">
-            <div class="modal-info-block">
-                <h3>📍 Ubicación y Cómo Llegar</h3>
+            <div class="modal-body">
+                <h3 style="color: #32cd32;">📍 Ubicación y Cómo Llegar</h3>
                 <p id="modal-descripcion"></p>
-                <a id="modal-enlace-maps" href="#" target="_blank" class="btn-conocer-mas" style="margin-top: 20px; text-decoration: none; text-align: center;"> Abrir en Google Maps</a>
+                <a id="modal-enlace-maps" href="#" target="_blank" class="btn-radio" style="margin-top:20px; display:block;">Abrir en Google Maps</a>
             </div>
         </div>
     </div>
-</div>
 
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    
+    <script src="main.js"></script>
+
+    <script>
+        AOS.init({
+            duration: 1000,   // Las cards aparecen suave en 1 segundo
+            once: false,      // Se vuelven a animar si subes y bajas
+            mirror: true,     // Efecto espejo al scrolear
+            offset: 120,      // Se activa un poquito antes de que llegues a la card
+            easing: 'ease-in-out' // Movimiento fluido, no de golpe
+        });
+    </script>
 </body>
-
 </html>
