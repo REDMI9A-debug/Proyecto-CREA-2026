@@ -104,7 +104,7 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background-color: var(--card-bg); 
+  background-color: var(--card-bg);
   color: var(--text);
   padding: 10px 16px;
   border-radius: 8px;
@@ -113,17 +113,15 @@ body {
   font-size: 14px;
   border: 1px solid #333;
   transition: all 0.3s ease;
-  z-index: 1000; 
+  z-index: 1000;
 }
 
 .btn-regresar:hover {
-  background-color: var(--accent); 
+  background-color: var(--accent);
   color: #fff;
   border-color: var(--accent);
-  transform: translateX(
-    -5px
-  ); 
-  box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3); 
+  transform: translateX(-5px);
+  box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3);
 }
 
 * {
@@ -133,7 +131,7 @@ body {
 @media (max-width: 768px) {
   .layout-principal {
     flex-direction: column;
-    padding: 10px; 
+    padding: 10px;
   }
 
   .reproductor-destacado {
@@ -142,23 +140,27 @@ body {
   }
 
   .columna-videos {
-    width: 100%; 
+    width: 100%;
     padding-right: 0;
-    max-height: none; 
+    max-height: none;
     overflow-y: visible;
   }
 
   .video-list {
     display: grid;
-    grid-template-columns: repeat(
-      2,
-      1fr
-    ); 
-    gap: 12px; 
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
   }
 
   .video-card p {
     font-size: 12px;
     padding: 8px;
   }
+}
+.pagina-pie {
+  text-align: center;
+  padding: 20px;
+  background-color: var(--card-bg);
+  color: var(--text);
+  border-top: 1px solid #333;
 }

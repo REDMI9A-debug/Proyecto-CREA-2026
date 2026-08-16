@@ -15,32 +15,6 @@
 </head>
 
 <body>
-    <a class="skip-link" href="#contenido-principal">Saltar al contenido</a>
-
-    <header class="site-header">
-        <div class="header-left">
-            <img src="../Images/normallogo.png" alt="Escudo de Voces de Babahoyo" class="escudo">
-            <div class="brand-info">
-                <span class="brand-name">Voces de Babahoyo</span>
-                <small class="tagline">Convivencia Escolar</small>
-            </div>
-        </div>
-
-        <a href="../index.html" class="btn-regresar">
-            <i class="fas fa-arrow-left" aria-hidden="true"></i>
-            Volver a Inicio
-        </a>
-    </header>
-
-    <main id="contenido-principal" class="pagina-convivencia">
-        <section class="intro-seccion" aria-labelledby="titulo-seccion">
-            <p class="intro-etiqueta">Armonía · Unidad Educativa Babahoyo</p>
-            <h1 id="titulo-seccion">Convivencia Escolar</h1>
-            <p class="intro-descripcion">
-                Escucha las voces de nuestros estudiantes sobre respeto, valores y la vida en comunidad dentro del
-                colegio.
-            </p>
-        </section>
 
         <div class="layout-principal">
             <aside class="columna-videos" aria-labelledby="lista-videos-titulo">
@@ -49,30 +23,13 @@
                     <p id="contador-videos" class="contador-videos" aria-live="polite"></p>
                 </div>
 
-                <div id="estado-carga" class="estado-panel" role="status" aria-live="polite">
-                    <div class="skeleton-lista" aria-hidden="true">
-                        <div class="skeleton-card"></div>
-                        <div class="skeleton-card"></div>
-                        <div class="skeleton-card"></div>
-                    </div>
-                    <p class="estado-texto">Cargando entrevistas…</p>
-                </div>
-
-                <div id="estado-error" class="estado-panel estado-error hidden" role="alert">
-                    <i class="fas fa-circle-exclamation" aria-hidden="true"></i>
-                    <p>No pudimos cargar los videos en este momento. Intenta recargar la página.</p>
-                    <button type="button" id="btn-reintentar" class="btn-secundario">Reintentar</button>
-                </div>
-
                 <section class="video-list" id="thumbnailGrid" aria-label="Lista de videos de convivencia escolar"></section>
             </aside>
 
             <section class="reproductor-destacado" aria-labelledby="video-activo-titulo">
                 <div id="player-placeholder" class="player-placeholder" aria-hidden="false">
                     <div class="placeholder-icono" aria-hidden="true">
-                        <i class="fas fa-play"></i>
                     </div>
-                    <p>Selecciona un episodio de la lista para comenzar.</p>
                 </div>
 
                 <div class="video-player hidden" id="video-player-shell">
@@ -83,17 +40,9 @@
 
                 <div class="video-meta">
                     <h2 id="video-activo-titulo">Selecciona un video</h2>
-                    <p id="video-activo-descripcion" class="video-descripcion">
-                        Cada entrevista recoge perspectivas reales sobre convivencia, respeto y valores en la UEB.
-                    </p>
                 </div>
             </section>
         </div>
-    </main>
-
-    <footer class="pagina-pie">
-        <p>Proyecto CREA · Unidad Educativa Babahoyo</p>
-    </footer>
 
     <script src="convivencia.js"></script>
 </body>
