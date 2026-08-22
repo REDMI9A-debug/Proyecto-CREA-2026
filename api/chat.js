@@ -3,10 +3,10 @@ export default async function handler(req, res) {
         return res.status(405).json({ error: 'Method Not Allowed' });
     }
 
-    const { userMessage, contexto } = req.body;
+    const { userMessage, contexto } = req.body || {};
 
     if (!userMessage) {
-        return res.status(400).json({ error: 'Missing message' });
+        return res.status(400).json({ error: 'Missing userMessage' });
     }
 
     try {
@@ -17,11 +17,11 @@ export default async function handler(req, res) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                model: 'llama-3.1-8b-instant',
+                model: 'llama3-8b-8192',
                 messages: [
                     {
                         role: 'system',
-                        content: `Contexto para responder preguntas del usuario:\n${contexto}`
+                        content: `Contexto documentado:\n${contexto || ''}`
                     },
                     {
                         role: 'user',
@@ -32,9 +32,9 @@ export default async function handler(req, res) {
         });
 
         if (!response.ok) {
-            const errorDetails = await response.text();
-            console.error('Groq API Error:', errorDetails);
-            return res.status(response.status).json({ error: 'Error calling LLM provider' });
+            const errData = await response.text();
+            console.error('Groq API Error:', errData);
+            return res.status(response.status).json({ error: errData });
         }
 
         const data = await response.json();
