@@ -17,23 +17,25 @@ export default async function handler(req, res) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                model: 'llama3-8b-8192',
+                model: 'llama-3.3-70b-versatile',
                 messages: [
                     {
                         role: 'system',
-                        content: `Contexto documentado:\n${contexto || ''}`
+                        content: `Eres el asistente virtual BICAR-EDU. Responde las preguntas de los usuarios basándote exclusivamente en la información provista en este documento:\n\n${contexto || ''}`
                     },
                     {
                         role: 'user',
                         content: userMessage
                     }
-                ]
+                ],
+                temperature: 0.5,
+                max_tokens: 1024
             })
         });
 
         if (!response.ok) {
             const errData = await response.text();
-            console.error('Groq API Error:', errData);
+            console.error('Groq Error Details:', errData);
             return res.status(response.status).json({ error: errData });
         }
 
@@ -41,7 +43,7 @@ export default async function handler(req, res) {
         return res.status(200).json(data);
 
     } catch (error) {
-        console.error('Server error:', error);
+        console.error('Server execution failure:', error);
         return res.status(500).json({ error: 'Internal Server Error' });
     }
 }
