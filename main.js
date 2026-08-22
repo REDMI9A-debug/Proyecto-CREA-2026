@@ -1,116 +1,57 @@
 const infoLugares = {
-    'salto': {
-        img: 'playairresistible.png',
-        titulo: 'Playas del Salto',
-        desc: 'Nuestra joya de agua dulce.',
-        maps: 'https://maps.app.goo.gl/ZAJLvMW7HEKCQ5uMA'
-    },
-    'malecon': {
-        img: 'malecon9octubre.png',
-        titulo: 'Malecón 9 de Octubre',
-        desc: 'Un paseo hermoso junto al río.',
-        maps: 'https://maps.app.goo.gl/HbZXgX2pe7R8TNweA'
-    },
-    'olmedo': {
-        img: 'casadeolmedo2.png',
-        titulo: 'Casa de Olmedo',
-        desc: 'Museo histórico.',
-        maps: 'https://maps.app.goo.gl/BZhYJ78X1uEBzjsS6'
-    },
-    'cachari': {
-        img: 'cerrocachari.png',
-        titulo: 'Cerro Cacharí',
-        desc: 'Aventura y leyendas.',
-        maps: 'https://maps.app.goo.gl/d6So5A2NRUFGqH5E9'
-    },
-    'catedral': {
-        img: 'actualidadbabah.png',
-        titulo: 'Iglesia Catedral',
-        desc: 'Ícono arquitectónico.',
-        maps: 'https://maps.app.goo.gl/UuiECcSewRbSceFw7'
-    },
-    'parque': {
-        img: 'parque24mayo.png',
-        titulo: 'Parque 24 de Mayo',
-        desc: 'Corazón de la ciudad.',
-        maps: 'https://maps.app.goo.gl/44AmsLvh42ECev6F9'
-    }
+    'salto': { img: 'playairresistible.png', titulo: 'Playas del Salto', desc: 'Nuestra joya de agua dulce.', maps: 'https://maps.app.goo.gl/ZAJLvMW7HEKCQ5uMA' },
+    'malecon': { img: 'malecon9octubre.png', titulo: 'Malecón 9 de Octubre', desc: 'Un paseo hermoso junto al río.', maps: 'https://maps.app.goo.gl/HbZXgX2pe7R8TNweA' },
+    'olmedo': { img: 'casadeolmedo2.png', titulo: 'Casa de Olmedo', desc: 'Museo histórico.', maps: 'https://maps.app.goo.gl/BZhYJ78X1uEBzjsS6' },
+    'cachari': { img: 'cerrocachari.png', titulo: 'Cerro Cacharí', desc: 'Aventura y leyendas.', maps: 'https://maps.app.goo.gl/d6So5A2NRUFGqH5E9' },
+    'catedral': { img: 'actualidadbabah.png', titulo: 'Iglesia Catedral', desc: 'Ícono arquitectónico.', maps: 'https://maps.app.goo.gl/UuiECcSewRbSceFw7' },
+    'parque': { img: 'parque24mayo.png', titulo: 'Parque 24 de Mayo', desc: 'Corazón de la ciudad.', maps: 'https://maps.app.goo.gl/44AmsLvh42ECev6F9' }
 };
 
 function abrirMapa(lugar) {
     const modalGeneral = document.getElementById('modal-mapa');
     const datos = infoLugares[lugar];
-
     if (datos && modalGeneral) {
         document.getElementById('modal-img').src = datos.img;
         document.getElementById('modal-titulo').innerText = datos.titulo;
         document.getElementById('modal-descripcion').innerText = datos.desc;
-
         const btnMaps = document.getElementById('modal-enlace-maps');
-        if (btnMaps) {
-            btnMaps.href = datos.maps;
-        }
-
+        if (btnMaps) { btnMaps.href = datos.maps; }
         modalGeneral.style.display = 'flex';
     }
 }
 
 function cerrarMapa() {
     const modalGeneral = document.getElementById('modal-mapa');
-    if (modalGeneral) {
-        modalGeneral.style.display = 'none';
-    }
+    if (modalGeneral) { modalGeneral.style.display = 'none'; }
 }
 
-
+// --- Lógica de Modales, Carruseles y Botones (INTACTA) ---
 document.addEventListener('DOMContentLoaded', () => {
-
     const btnVerde = document.getElementById('abrirModal');
     const btnX = document.getElementById('cerrarModal');
     const ventanaModal = document.getElementById('modalOlmedo');
     const modalMapa = document.getElementById('modal-mapa');
 
     if (btnVerde && ventanaModal) {
-        btnVerde.addEventListener('click', (e) => {
-            e.preventDefault();
-            ventanaModal.style.display = 'flex';
-        });
+        btnVerde.addEventListener('click', (e) => { e.preventDefault(); ventanaModal.style.display = 'flex'; });
     }
-
     if (btnX && ventanaModal) {
-        btnX.addEventListener('click', () => {
-            ventanaModal.style.display = 'none';
-        });
+        btnX.addEventListener('click', () => { ventanaModal.style.display = 'none'; });
     }
-
     window.addEventListener('click', (event) => {
-        if (event.target === ventanaModal) {
-            ventanaModal.style.display = 'none';
-        }
-        if (modalMapa && event.target === modalMapa) {
-            modalMapa.style.display = 'none';
-        }
+        if (event.target === ventanaModal) ventanaModal.style.display = 'none';
+        if (modalMapa && event.target === modalMapa) modalMapa.style.display = 'none';
     });
 
     const btnAtardecer = document.getElementById('toggle-atardecer');
     const mainLogo = document.getElementById('main-logo');
-
     if (btnAtardecer && mainLogo) {
         btnAtardecer.addEventListener('click', (e) => {
             e.preventDefault();
-
             document.body.classList.toggle('modo-atardecer');
             const esAtardecer = document.body.classList.contains('modo-atardecer');
-
-            if (esAtardecer) {
-                mainLogo.src = 'atardecerlogo.png';
-                btnAtardecer.innerText = '🌿';
-                console.log("Modo Atardecer activado");
-            } else {
-                mainLogo.src = 'normallogo.png';
-                btnAtardecer.innerText = '🌅';
-                console.log("Modo Original activado");
-            }
+            if (esAtardecer) { mainLogo.src = 'atardecerlogo.png'; btnAtardecer.innerText = '🌿'; }
+            else { mainLogo.src = 'normallogo.png'; btnAtardecer.innerText = '🌅'; }
         });
     }
 });
@@ -118,178 +59,71 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener("DOMContentLoaded", () => {
     const sectionHero = document.getElementById('heroCarouselSection');
     const slidesHero = document.querySelectorAll('#heroCarouselSection .carousel-slide');
-
     if (!sectionHero || slidesHero.length === 0) return;
-
-    let indexHero = 0;
-    let timerHero = null;
-
-    function cambiarSlideHero() {
-        slidesHero[indexHero].classList.remove('active');
-        indexHero = (indexHero + 1) % slidesHero.length;
-        slidesHero[indexHero].classList.add('active');
-    }
-
-    function activarTimerHero() {
-        if (timerHero === null) {
-            timerHero = setInterval(cambiarSlideHero, 3000);
-        }
-    }
-
-    function desactivarTimerHero() {
-        if (timerHero !== null) {
-            clearInterval(timerHero);
-            timerHero = null;
-        }
-    }
-
+    let indexHero = 0; let timerHero = null;
+    function cambiarSlideHero() { slidesHero[indexHero].classList.remove('active'); indexHero = (indexHero + 1) % slidesHero.length; slidesHero[indexHero].classList.add('active'); }
+    function activarTimerHero() { if (timerHero === null) timerHero = setInterval(cambiarSlideHero, 3000); }
+    function desactivarTimerHero() { if (timerHero !== null) { clearInterval(timerHero); timerHero = null; } }
     sectionHero.addEventListener('mouseenter', desactivarTimerHero);
     sectionHero.addEventListener('mouseleave', activarTimerHero);
-
     activarTimerHero();
 });
-
 
 document.addEventListener("DOMContentLoaded", () => {
     const btnToggle = document.getElementById('btn-toggle-simbolos');
     const epocaHistorica = document.getElementById('epoca-historica');
     const epocaActual = document.getElementById('epoca-actual');
-
     let viendoHistoricos = true;
-
     if (!btnToggle || !epocaHistorica || !epocaActual) return;
-
     btnToggle.addEventListener('click', () => {
         if (viendoHistoricos) {
-            epocaHistorica.classList.remove('activa');
-            epocaHistorica.classList.add('oculta');
-
-            epocaActual.classList.remove('oculta');
-            epocaActual.classList.add('activa');
-
-            btnToggle.innerHTML = 'Ver Símbolos Históricos <i class="fas fa-history"></i>';
-            viendoHistoricos = false;
+            epocaHistorica.classList.remove('activa'); epocaHistorica.classList.add('oculta');
+            epocaActual.classList.remove('oculta'); epocaActual.classList.add('activa');
+            btnToggle.innerHTML = 'Ver Símbolos Históricos <i class="fas fa-history"></i>'; viendoHistoricos = false;
         } else {
-            epocaActual.classList.remove('activa');
-            epocaActual.classList.add('oculta');
-
-            epocaHistorica.classList.remove('oculta');
-            epocaHistorica.classList.add('activa');
-
-            btnToggle.innerHTML = 'Revelar Símbolos Actuales <i class="fas fa-arrow-right"></i>';
-            viendoHistoricos = true;
+            epocaActual.classList.remove('activa'); epocaActual.classList.add('oculta');
+            epocaHistorica.classList.remove('oculta'); epocaHistorica.classList.add('activa');
+            btnToggle.innerHTML = 'Revelar Símbolos Actuales <i class="fas fa-arrow-right"></i>'; viendoHistoricos = true;
         }
     });
 });
 
-
 document.addEventListener("DOMContentLoaded", () => {
     const sectionUltimate = document.getElementById('heroCarouselSection-ultimate');
     const slidesUltimate = document.querySelectorAll('#heroCarouselSection-ultimate .carousel-slide-n');
-
     if (!sectionUltimate || slidesUltimate.length === 0) return;
-
-    let indexUltimate = 0;
-    let timerUltimate = null;
-
-    function cambiarSlideUltimate() {
-        slidesUltimate[indexUltimate].classList.remove('active');
-        indexUltimate = (indexUltimate + 1) % slidesUltimate.length;
-        slidesUltimate[indexUltimate].classList.add('active');
-    }
-
-    function activarTimerUltimate() {
-        if (timerUltimate === null) {
-            timerUltimate = setInterval(cambiarSlideUltimate, 1000);
-        }
-    }
-
-    function desactivarTimerUltimate() {
-        if (timerUltimate !== null) {
-            clearInterval(timerUltimate);
-            timerUltimate = null;
-        }
-    }
-
+    let indexUltimate = 0; let timerUltimate = null;
+    function cambiarSlideUltimate() { slidesUltimate[indexUltimate].classList.remove('active'); indexUltimate = (indexUltimate + 1) % slidesUltimate.length; slidesUltimate[indexUltimate].classList.add('active'); }
+    function activarTimerUltimate() { if (timerUltimate === null) timerUltimate = setInterval(cambiarSlideUltimate, 1000); }
+    function desactivarTimerUltimate() { if (timerUltimate !== null) { clearInterval(timerUltimate); timerUltimate = null; } }
     sectionUltimate.addEventListener('mouseenter', desactivarTimerUltimate);
     sectionUltimate.addEventListener('mouseleave', activarTimerUltimate);
-
     activarTimerUltimate();
 });
-
 
 document.addEventListener("DOMContentLoaded", () => {
     const riel = document.getElementById('rielBusesUrbano');
     const btnPrev = document.getElementById('btnBusPrev');
     const btnNext = document.getElementById('btnBusNext');
     const puntos = document.querySelectorAll('.punto-bus');
-
     if (!riel || !btnPrev || !btnNext) return;
-
-    let posicionActual = 0;
-    const totalCards = 5;
-
-    function moverSlider() {
-        riel.style.transform = `translateX(-${posicionActual * 20}%)`;
-        actualizarPuntos();
-    }
-
-    function actualizarPuntos() {
-        puntos.forEach((punto, i) => {
-            if (i === posicionActual) {
-                punto.classList.add('activo');
-            } else {
-                punto.classList.remove('activo');
-            }
-        });
-    }
-
-    btnNext.addEventListener('click', () => {
-        if (posicionActual < totalCards - 1) {
-            posicionActual++;
-        } else {
-            posicionActual = 0;
-        }
-        moverSlider();
-    });
-
-    btnPrev.addEventListener('click', () => {
-        if (posicionActual > 0) {
-            posicionActual--;
-        } else {
-            posicionActual = totalCards - 1;
-        }
-        moverSlider();
-    });
-
-    puntos.forEach(punto => {
-        punto.addEventListener('click', (e) => {
-            posicionActual = parseInt(e.target.getAttribute('data-index'));
-            moverSlider();
-        });
-    });
+    let posicionActual = 0; const totalCards = 5;
+    function moverSlider() { riel.style.transform = `translateX(-${posicionActual * 20}%)`; actualizarPuntos(); }
+    function actualizarPuntos() { puntos.forEach((punto, i) => { if (i === posicionActual) punto.classList.add('activo'); else punto.classList.remove('activo'); }); }
+    btnNext.addEventListener('click', () => { if (posicionActual < totalCards - 1) posicionActual++; else posicionActual = 0; moverSlider(); });
+    btnPrev.addEventListener('click', () => { if (posicionActual > 0) posicionActual--; else posicionActual = totalCards - 1; moverSlider(); });
+    puntos.forEach(punto => { punto.addEventListener('click', (e) => { posicionActual = parseInt(e.target.getAttribute('data-index')); moverSlider(); }); });
 });
 
 document.addEventListener("DOMContentLoaded", () => {
     const panelesBuses = document.querySelectorAll('.panel-bus');
-
     if (panelesBuses.length === 0) return;
-
-    function borrarClasesActivas() {
-        panelesBuses.forEach(panel => {
-            panel.classList.remove('activa');
-        });
-    }
-
-    panelesBuses.forEach(panel => {
-        panel.addEventListener('click', () => {
-            borrarClasesActivas();
-            panel.classList.add('activa');
-        });
-    });
+    function borrarClasesActivas() { panelesBuses.forEach(panel => { panel.classList.remove('activa'); }); }
+    panelesBuses.forEach(panel => { panel.addEventListener('click', () => { borrarClasesActivas(); panel.classList.add('activa'); }); });
 });
 
-const API_URL = "api.php";
+// --- Lógica del Chat (SEGURA, sin API Keys) ---
+const API_URL = "/api/chat"; // 🔒 Aquí está el cambio clave. Apunta a la función de Vercel, no a api.php
 const PDF_RUTA = "Documents/Chatbotbabahoyo.pdf";
 let documentoPdfContexto = "";
 const pdfjsLib = window['pdfjs-dist/build/pdf'];
@@ -303,129 +137,63 @@ async function extraerTextoDePDF() {
         console.log("Iniciando lectura del PDF...");
         const cargandoPdf = pdfjsLib.getDocument(PDF_RUTA);
         const pdf = await cargandoPdf.promise;
-
         let textoCompleto = "";
-
         for (let i = 1; i <= pdf.numPages; i++) {
             const pagina = await pdf.getPage(i);
             const contenidoTexto = await pagina.getTextContent();
             const stringsPagina = contenidoTexto.items.map(item => item.str);
             textoCompleto += stringsPagina.join(" ") + "\n";
         }
-
         documentoPdfContexto = textoCompleto.trim();
         console.log("¡BICAR-EDU ha leído con éxito tu PDF! Tamaño del texto cargado:", documentoPdfContexto.length);
-
     } catch (error) {
         console.error("Error crítico al intentar leer el PDF:", error);
-        documentoPdfContexto = "Error: No se pudo leer el archivo documento_proyecto.pdf. Verifica que esté en la raíz de tu proyecto.";
+        documentoPdfContexto = "Error: No se pudo leer el archivo documento_proyecto.pdf.";
     }
 }
-
 extraerTextoDePDF();
 
-function getFormattedTime() {
-    const now = new Date();
-    return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-}
-
+function getFormattedTime() { const now = new Date(); return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); }
 function appendMessage(text, sender) {
-    const messageDiv = document.createElement('div');
-    messageDiv.classList.add('message', `${sender}-message`);
-
+    const messageDiv = document.createElement('div'); messageDiv.classList.add('message', `${sender}-message`);
     const p = document.createElement('p');
-
-    if (sender === 'bot') {
-        p.innerHTML = marked.parse(text);
-    } else {
-        p.textContent = text;
-    }
-
-    const timeSpan = document.createElement('span');
-    timeSpan.classList.add('message-time');
-    timeSpan.textContent = getFormattedTime();
-
-    messageDiv.appendChild(p);
-    messageDiv.appendChild(timeSpan);
-    chatMessagesArea.appendChild(messageDiv);
-
+    if (sender === 'bot') { p.innerHTML = marked.parse(text); } else { p.textContent = text; }
+    const timeSpan = document.createElement('span'); timeSpan.classList.add('message-time'); timeSpan.textContent = getFormattedTime();
+    messageDiv.appendChild(p); messageDiv.appendChild(timeSpan); chatMessagesArea.appendChild(messageDiv);
     chatMessagesArea.scrollTop = chatMessagesArea.scrollHeight;
 }
 
 async function askGroq(userMessage) {
     const loadingDiv = document.createElement('div');
-    loadingDiv.classList.add('message', 'bot-message');
-    loadingDiv.id = 'loading-bot';
+    loadingDiv.classList.add('message', 'bot-message'); loadingDiv.id = 'loading-bot';
     loadingDiv.innerHTML = `<p><i>BICAR-EDU analizando el documento...</i></p>`;
-    chatMessagesArea.appendChild(loadingDiv);
-    chatMessagesArea.scrollTop = chatMessagesArea.scrollHeight;
+    chatMessagesArea.appendChild(loadingDiv); chatMessagesArea.scrollTop = chatMessagesArea.scrollHeight;
 
     const contextoSeguro = documentoPdfContexto.slice(0, 12000);
-
-    const payload = {
-        userMessage: userMessage,
-        contexto: contextoSeguro
-    };
+    const payload = { userMessage: userMessage, contexto: contextoSeguro };
 
     try {
-        const response = await fetch(API_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-        });
-
-        if (!response.ok) {
-            const errorText = await response.text();
-            throw new Error(`HTTP ${response.status}`);
-        }
-
+        const response = await fetch(API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+        if (!response.ok) { const errorText = await response.text(); throw new Error(`HTTP ${response.status}`); }
         const data = await response.json();
-
-        if (document.getElementById('loading-bot')) {
-            document.getElementById('loading-bot').remove();
-        }
-
-        if (data.choices && data.choices[0].message.content) {
-            appendMessage(data.choices[0].message.content, 'bot');
-        } else {
-            appendMessage("El asistente no pudo procesar tu pregunta.", 'bot');
-        }
-
+        if (document.getElementById('loading-bot')) document.getElementById('loading-bot').remove();
+        if (data.choices && data.choices[0].message.content) { appendMessage(data.choices[0].message.content, 'bot'); }
+        else { appendMessage("El asistente no pudo procesar tu pregunta.", 'bot'); }
     } catch (error) {
         console.error("Fallo crítico:", error);
-        if (document.getElementById('loading-bot')) {
-            document.getElementById('loading-bot').remove();
-        }
+        if (document.getElementById('loading-bot')) document.getElementById('loading-bot').remove();
         appendMessage("Error de conexión. Intenta de nuevo.", 'bot');
     }
 }
 
-chatForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const messageText = chatInput.value.trim();
-    if (!messageText) return;
-
-    appendMessage(messageText, 'user');
-    chatInput.value = '';
-
-    askGroq(messageText);
-});
+chatForm.addEventListener('submit', (e) => { e.preventDefault(); const messageText = chatInput.value.trim(); if (!messageText) return; appendMessage(messageText, 'user'); chatInput.value = ''; askGroq(messageText); });
 
 document.addEventListener("DOMContentLoaded", () => {
     const btnAbrirChat = document.getElementById('btn-abrir-chat');
     const btnCerrarChat = document.getElementById('btn-cerrar-chat');
     const popupChatbot = document.getElementById('popup-chatbot');
-
     if (btnAbrirChat && btnCerrarChat && popupChatbot) {
-        btnAbrirChat.addEventListener('click', () => {
-            popupChatbot.classList.remove('chatbot-oculto');
-            popupChatbot.classList.add('chatbot-visible');
-        });
-
-        btnCerrarChat.addEventListener('click', () => {
-            popupChatbot.classList.remove('chatbot-visible');
-            popupChatbot.classList.add('chatbot-oculto');
-        });
+        btnAbrirChat.addEventListener('click', () => { popupChatbot.classList.remove('chatbot-oculto'); popupChatbot.classList.add('chatbot-visible'); });
+        btnCerrarChat.addEventListener('click', () => { popupChatbot.classList.remove('chatbot-visible'); popupChatbot.classList.add('chatbot-oculto'); });
     }
 });
