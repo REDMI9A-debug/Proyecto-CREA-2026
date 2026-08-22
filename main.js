@@ -164,26 +164,48 @@ function appendMessage(text, sender) {
 
 async function askGroq(userMessage) {
     const loadingDiv = document.createElement('div');
-    loadingDiv.classList.add('message', 'bot-message'); loadingDiv.id = 'loading-bot';
+    loadingDiv.classList.add('message', 'bot-message'); 
+    loadingDiv.id = 'loading-bot';
     loadingDiv.innerHTML = `<p><i>BICAR-EDU analizando el documento...</i></p>`;
-    chatMessagesArea.appendChild(loadingDiv); chatMessagesArea.scrollTop = chatMessagesArea.scrollHeight;
+    chatMessagesArea.appendChild(loadingDiv); 
+    chatMessagesArea.scrollTop = chatMessagesArea.scrollHeight;
 
-    const contextoSeguro = documentoPdfContexto.slice(0, 12000);
-    const payload = { userMessage: userMessage, contexto: contextoSeguro };
+    // Aseguramos un contexto limpio de texto plano
+    const contextoLimpio = (documentoPdfContexto || "Informacion sobre Babahoyo").slice(0, 4000);
+
+    const payload = { 
+        userMessage: userMessage, 
+        contexto: contextoLimpio 
+    };
 
     try {
-        const response = await fetch(API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-        if (!response.ok) { const errorText = await response.text(); throw new Error(`HTTP ${response.status}`); }
+        const response = await fetch(API_URL, { 
+            method: 'POST', 
+            headers: { 'Content-Type': 'application/json' }, 
+            body: JSON.stringify(payload) 
+        });
+
+        if (!response.ok) { 
+            const errorText = await response.text(); 
+            console.error("Respuesta fallida del servidor:", errorText);
+            throw new Error(`HTTP ${response.status}`); 
+        }
+
         const data = await response.json();
         if (document.getElementById('loading-bot')) document.getElementById('loading-bot').remove();
-        if (data.choices && data.choices[0].message.content) { appendMessage(data.choices[0].message.content, 'bot'); }
-        else { appendMessage("El asistente no pudo procesar tu pregunta.", 'bot'); }
+
+        if (data.choices && data.choices[0] && data.choices[0].message) { 
+            appendMessage(data.choices[0].message.content, 'bot'); 
+        } else { 
+            appendMessage("El asistente no pudo procesar tu pregunta.", 'bot'); 
+        }
     } catch (error) {
         console.error("Fallo crítico:", error);
         if (document.getElementById('loading-bot')) document.getElementById('loading-bot').remove();
         appendMessage("Error de conexión. Intenta de nuevo.", 'bot');
     }
 }
+
 
 chatForm.addEventListener('submit', (e) => { e.preventDefault(); const messageText = chatInput.value.trim(); if (!messageText) return; appendMessage(messageText, 'user'); chatInput.value = ''; askGroq(messageText); });
 
