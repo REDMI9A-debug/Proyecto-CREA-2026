@@ -122,7 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
     panelesBuses.forEach(panel => { panel.addEventListener('click', () => { borrarClasesActivas(); panel.classList.add('activa'); }); });
 });
 
-const API_URL = "/api/chat.js"; 
+const API_URL = "/api/chat"; 
 const PDF_RUTA = "Documents/Chatbotbabahoyo.pdf";
 let documentoPdfContexto = "";
 const pdfjsLib = window['pdfjs-dist/build/pdf'];
