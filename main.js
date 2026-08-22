@@ -122,8 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
     panelesBuses.forEach(panel => { panel.addEventListener('click', () => { borrarClasesActivas(); panel.classList.add('activa'); }); });
 });
 
-// --- Lógica del Chat (SEGURA, sin API Keys) ---
-const API_URL = "/api/chat"; // 🔒 Aquí está el cambio clave. Apunta a la función de Vercel, no a api.php
+const API_URL = "/api/chat.js"; 
 const PDF_RUTA = "Documents/Chatbotbabahoyo.pdf";
 let documentoPdfContexto = "";
 const pdfjsLib = window['pdfjs-dist/build/pdf'];
