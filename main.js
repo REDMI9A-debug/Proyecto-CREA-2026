@@ -289,10 +289,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-const parte1 = "gsk_irah0dslpipzsRhPG";
-const parte2 = "QekWGdyb3FYL5deNrxUUoZgkv0UhfsQxEMP";
-const API_KEY = parte1 + parte2;
-const API_URL = "https://api.groq.com/openai/v1/chat/completions";
+const API_URL = "api.php";
 const PDF_RUTA = "Documents/Chatbotbabahoyo.pdf";
 let documentoPdfContexto = "";
 const pdfjsLib = window['pdfjs-dist/build/pdf'];
@@ -364,48 +361,22 @@ async function askGroq(userMessage) {
     chatMessagesArea.scrollTop = chatMessagesArea.scrollHeight;
 
     const contextoSeguro = documentoPdfContexto.slice(0, 12000);
+
     const payload = {
-        model: "llama-3.3-70b-versatile",
-        messages: [
-            {
-                role: "system",
-                content: `Eres BICAR-EDU, un asistente virtual hiper-especializado y cerrado exclusivamente al Cantón Babahoyo, provincia de Los Ríos, Ecuador.
-
-[REGLAS CRÍTICAS DE COMPORTAMIENTO]
-1. ÁMBITO GEOGRÁFICO ABSOLUTO: Tu único universo de conocimiento es Babahoyo. Si te preguntan algo ajeno, niégate amablemente diciendo: "Solo respondo sobre el cantón Babahoyo y su patrimonio. ¿En qué te puedo ayudar sobre nuestra ciudad?".
-2. PROHIBICION DE MARCAS: No menciones proyectos ni la frase "Voces de Babahoyo". Eres simplemente BICAR-EDU.
-
-[REGLAS ESTRICTAS DE FORMATO Y CONCISIÓN]
-1. BREVEDAD OBLIGATORIA: Respuestas de MÁXIMO 2 a 3 oraciones cortas (menos de 50 palabras en total).
-2. SIN RODEOS NI INTROS REPETITIVAS: PROHIBIDO decir "¡Bienvenido! Estoy aquí para ayudarte...", "Babahoyo es una ciudad con una rica historia...", o frases cliché de relleno. Responde directo a la pregunta del usuario.
-3. FORMATO MARKDOWN: Usa negritas (**texto**) para resaltar los términos clave de Babahoyo.
-4. TONO: Local, amigable, directo y educativo.
-
-[FUENTE DE INFORMACIÓN PRIORITARIA]
-Contexto del PDF:
-${contextoSeguro}`
-            },
-            {
-                role: "user",
-                content: userMessage
-            }
-        ]
+        userMessage: userMessage,
+        contexto: contextoSeguro
     };
 
     try {
         const response = await fetch(API_URL, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${API_KEY}`
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
         });
 
         if (!response.ok) {
-            const errorRaw = await response.json();
-            console.error("ERROR REAL DEL SERVIDOR DE GROQ:", errorRaw);
-            throw new Error(`Código de estado devuelto: ${response.status}`);
+            const errorText = await response.text();
+            throw new Error(`HTTP ${response.status}`);
         }
 
         const data = await response.json();
@@ -415,19 +386,17 @@ ${contextoSeguro}`
         }
 
         if (data.choices && data.choices[0].message.content) {
-            const botResponse = data.choices[0].message.content;
-            appendMessage(botResponse, 'bot');
+            appendMessage(data.choices[0].message.content, 'bot');
         } else {
-            console.warn("Estructura inesperada:", data);
-            appendMessage("El servidor respondió pero con un formato desconocido.", 'bot');
+            appendMessage("El asistente no pudo procesar tu pregunta.", 'bot');
         }
 
     } catch (error) {
-        console.error("Fallo crítico en la ejecución:", error);
+        console.error("Fallo crítico:", error);
         if (document.getElementById('loading-bot')) {
             document.getElementById('loading-bot').remove();
         }
-        appendMessage("Error en la petición. Revisa tu consola de desarrollador (F12) para más detalles.", 'bot');
+        appendMessage("Error de conexión. Intenta de nuevo.", 'bot');
     }
 }
 
@@ -443,17 +412,20 @@ chatForm.addEventListener('submit', (e) => {
     askGroq(messageText);
 });
 
-const btnAbrirChat = document.getElementById('btn-abrir-chat');
-const btnCerrarChat = document.getElementById('btn-cerrar-chat');
-const popupChatbot = document.getElementById('popup-chatbot');
+document.addEventListener("DOMContentLoaded", () => {
+    const btnAbrirChat = document.getElementById('btn-abrir-chat');
+    const btnCerrarChat = document.getElementById('btn-cerrar-chat');
+    const popupChatbot = document.getElementById('popup-chatbot');
 
-btnAbrirChat.addEventListener('click', () => {
-    popupChatbot.classList.remove('chatbot-oculto');
-    popupChatbot.classList.add('chatbot-visible');
+    if (btnAbrirChat && btnCerrarChat && popupChatbot) {
+        btnAbrirChat.addEventListener('click', () => {
+            popupChatbot.classList.remove('chatbot-oculto');
+            popupChatbot.classList.add('chatbot-visible');
+        });
+
+        btnCerrarChat.addEventListener('click', () => {
+            popupChatbot.classList.remove('chatbot-visible');
+            popupChatbot.classList.add('chatbot-oculto');
+        });
+    }
 });
-
-btnCerrarChat.addEventListener('click', () => {
-    popupChatbot.classList.remove('chatbot-visible');
-    popupChatbot.classList.add('chatbot-oculto');
-});
-

@@ -1,7 +1,7 @@
 <?php
 header('Content-Type: application/json');
 
-const API_KEY = atob("Z3NrX2lyYWgwZHNscGlwZW5NSaFBHVUVrV0dkeWIzRllMNWRlTnJ4VVVvWmdrdjBVaGZzUXhFTVA=");
+const API_KEY = "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";
 $apiUrl = 'https://api.groq.com/openai/v1/chat/completions';
 
 $inputJSON = file_get_contents('php://input');
@@ -16,7 +16,7 @@ $userMessage = $inputData['userMessage'];
 $contextoSeguro = isset($inputData['contexto']) ? $inputData['contexto'] : '';
 
 $payload = [
-    'model' => 'llama-3.3-70b-versatile',
+    'model' => 'llama-3.3-70b-versatile', // ✅ Modelo correcto
     'messages' => [
         [
             'role' => 'system',
@@ -34,7 +34,7 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
     'Content-Type: application/json',
-    'Authorization: Bearer ' . $apiKey
+    'Authorization: Bearer ' . API_KEY // ✅ Corregido
 ]);
 curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
 
