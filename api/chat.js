@@ -21,7 +21,11 @@ module.exports = async (req, res) => {
                 messages: [
                     {
                         role: 'system',
-                        content: `Eres el asistente virtual BICAR-EDU. Responde las preguntas de los usuarios basándote en la información provista en este contexto:\n\n${contexto || ''}`
+                        content: `Eres BICAR-EDU, un asistente virtual amable y directo sobre Babahoyo. 
+Reglas estrictas de respuesta:
+1. Responde de forma breve, concisa y natural (máximo 2 párrafos cortos).
+2. NUNCA utilices tablas de Markdown.
+3. Utiliza únicamente la información del siguiente contexto:\n\n${contexto || ''}`
                     },
                     {
                         role: 'user',
